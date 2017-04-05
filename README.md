@@ -50,13 +50,13 @@ class ClipboardDemo extends Component {
 #### 样式引入
 - 可以使用link引入build目录下Clipboard.css
 ```
-<link rel="stylesheet" href="./node_modules/bee-modal/build/Clipboard.css">
+<link rel="stylesheet" href="./node_modules/bee-clipboard/build/Clipboard.css">
 ```
 - 可以在js中import样式
 ```js
-import "./node_modules/bee-modal/src/Clipboard.scss"
+import "./node_modules/bee-clipboard/src/Clipboard.scss"
 //或是
-import "./node_modules/bee-modal/build/Clipboard.css"
+import "./node_modules/bee-clipboard/build/Clipboard.css"
 ```
 
 
@@ -66,7 +66,7 @@ import "./node_modules/bee-modal/build/Clipboard.css"
 |参数|说明|类型|默认值|
 |:---|:---:|:--:|---:|
 |text|要复制的文本内容|`string`|-|
-|target|要复制内容的目标元素，可传选择器，如果选择器得出多个，会取第一个|`string`|-|
+|target|要复制内容的目标元素，可传选择器，如果选择器得出多个，会取第一个|`string`或dom选择器|-|
 |success|复制成功之后的回调函数|`function`|-|
 |error|复制失败之后的回调函数|`function`|-|
 
