@@ -26,7 +26,7 @@ react bee-clipboard component for tinper-bee
 ## 使用方法
 
 ```js
-import Modal from 'bee-clipboard';
+import Clipboard from 'bee-clipboard';
 
 class ClipboardDemo extends Component {
     render() {
