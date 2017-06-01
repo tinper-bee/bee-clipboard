@@ -89,8 +89,7 @@ class Clipboard extends Component {
         return (
         <OverlayTrigger  overlay = {tooltip()} placement="top" >
             <span onMouseOut={this.blur} className="u-clipboard" id={this.state.id} data-clipboard-action={action}
-                  data-clipboard-target={target} data-clipboard-text={text}
-                  title={this.state.actionTitle}>
+                  data-clipboard-target={target} data-clipboard-text={text}>
                         {this.props.children ? this.props.children : (<Icon className={classnames({
                             'uf-correct': this.state.currect,
                             'uf-copy': !this.state.currect
