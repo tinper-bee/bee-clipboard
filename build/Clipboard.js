@@ -157,8 +157,7 @@ var Clipboard = function (_Component) {
             _react2["default"].createElement(
                 'span',
                 { onMouseOut: this.blur, className: 'u-clipboard', id: this.state.id, 'data-clipboard-action': action,
-                    'data-clipboard-target': target, 'data-clipboard-text': text,
-                    title: this.state.actionTitle },
+                    'data-clipboard-target': target, 'data-clipboard-text': text },
                 this.props.children ? this.props.children : _react2["default"].createElement(
                     _beeIcon2["default"],
                     { className: (0, _classnames2["default"])({
