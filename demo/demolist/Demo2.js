@@ -4,6 +4,10 @@
  * @description 复制目标元素的内容到剪切板
  *
  */
+
+import React, { Component } from 'react';
+import Clipboard from '../../src';
+
 class Demo2 extends Component {
     render() {
         function success(){
@@ -22,3 +26,5 @@ class Demo2 extends Component {
         )
     }
 }
+
+export default Demo2;
