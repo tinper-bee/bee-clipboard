@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import clipboard from 'clipboard';
 import classnames from 'classnames';
 import Icon from 'bee-icon';
@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import FormControl from 'bee-form-control';
 import Tooltip from 'bee-tooltip';
 import OverlayTrigger from 'bee-overlay/build/OverlayTrigger';
+import PropTypes from 'prop-types';
 
 //text和target都写的时候，target无效。 text的cut改为copy。
 // target可以传css3选择器

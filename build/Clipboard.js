@@ -44,6 +44,10 @@ var _OverlayTrigger = require('bee-overlay/build/OverlayTrigger');
 
 var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -57,10 +61,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //text和target都写的时候，target无效。 text的cut改为copy。
 // target可以传css3选择器
 var propTypes = {
-    action: _react.PropTypes.oneOf(['copy', 'cut']),
-    text: _react.PropTypes.string,
-    success: _react.PropTypes.func,
-    error: _react.PropTypes.func
+    action: _propTypes2["default"].oneOf(['copy', 'cut']),
+    text: _propTypes2["default"].string,
+    success: _propTypes2["default"].func,
+    error: _propTypes2["default"].func
 };
 var defaultProps = {
     action: 'copy',
