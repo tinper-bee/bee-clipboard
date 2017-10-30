@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import clipboard from 'clipboard';
 import classnames from 'classnames';
 import Icon from 'bee-icon';
-import Modal from 'bee-modal';
-import Button from 'bee-button';
 import ReactDOM from 'react-dom';
-import FormControl from 'bee-form-control';
 import Tooltip from 'bee-tooltip';
 import OverlayTrigger from 'bee-overlay/build/OverlayTrigger';
 import PropTypes from 'prop-types';
@@ -33,19 +30,12 @@ class Clipboard extends Component {
         this.state = {
             currect: false,
             actionTitle: '复制',
-            modalShow: false,
             html: '',
             tootipContent:'复制',
             id: 'id' + Math.round((Math.random() * 1000) + 1) + new Date().getTime(),
         };
-        this.close = this.close.bind(this);
-        this.blur = this.blur.bind(this);
     }
-    close() {
-        this.setState({
-            modalShow: false
-        })
-    }
+
     componentWillMount() {
         let self = this;
         let {action, success, error} = this.props;
@@ -58,21 +48,20 @@ class Clipboard extends Component {
         cb.on('success', function (e) {
             self.setState({
                 currect: true,
-                tootipContent:'已复制'
+                tootipContent:'已复制',
             });
             e.clearSelection();
             if (success instanceof Function) success();
         });
         cb.on('error', function (e) {
             self.setState({
-                html: e.text,
-                modalShow: true
+                html: e.text
             });
             ReactDOM.findDOMNode(self.refs.text).select();
             if (error instanceof Function) error();
         });
     }
-    blur(){
+    blur=()=>{
         this.setState({
             currect: false,
             tootipContent:'复制'
@@ -88,25 +77,14 @@ class Clipboard extends Component {
             );
         };
         return (
-        <OverlayTrigger  overlay = {tooltip()} placement="top" >
+        <OverlayTrigger overlay = {tooltip()} placement="top" >
             <span onMouseOut={this.blur} className="u-clipboard" id={this.state.id} data-clipboard-action={action}
                   data-clipboard-target={target} data-clipboard-text={text}>
                         {this.props.children ? this.props.children : (<Icon className={classnames({
                             'uf-correct': this.state.currect,
                             'uf-copy': !this.state.currect
                         })}> </Icon>)}
-                <Modal show={ this.state.modalShow } onHide={ this.close }>
-                                <Modal.Header closeButton>
-                                    <Modal.Title > Ctrl+C 复制到剪切板 </Modal.Title>
-                                </Modal.Header >
-                                <Modal.Body >
-                                    <FormControl  ref="text" type="text" readOnly value={this.state.html}/>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button onClick={ this.close }> 关闭 </Button>
-                                </Modal.Footer>
-                            </Modal>
-                        </span>
+            </span>
         </OverlayTrigger>
         )
     }

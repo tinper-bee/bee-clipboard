@@ -34,9 +34,7 @@
  },
  "dependencies": {
   "babel-runtime": "latest",
-  "bee-form-control": "latest",
   "bee-icon": "latest",
-  "bee-modal": "latest",
   "bee-overlay": "latest",
   "bee-tooltip": "latest",
   "classnames": "^2.2.5",

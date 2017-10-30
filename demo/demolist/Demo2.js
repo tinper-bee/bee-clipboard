@@ -20,7 +20,6 @@ class Demo2 extends Component {
             <div>
                 <div id="copyContent" >目标复制-我将被复制到剪切板</div>
                 <Clipboard action="copy"  target='#copyContent' success={success} error={error}>
-
                 </Clipboard>
             </div>
         )
