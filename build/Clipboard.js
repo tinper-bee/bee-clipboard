@@ -20,29 +20,13 @@ var _beeIcon = require('bee-icon');
 
 var _beeIcon2 = _interopRequireDefault(_beeIcon);
 
-var _beeModal = require('bee-modal');
-
-var _beeModal2 = _interopRequireDefault(_beeModal);
-
-var _beeButton = require('bee-button');
-
-var _beeButton2 = _interopRequireDefault(_beeButton);
-
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _beeFormControl = require('bee-form-control');
-
-var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
-
 var _beeTooltip = require('bee-tooltip');
 
 var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
-
-var _OverlayTrigger = require('bee-overlay/build/OverlayTrigger');
-
-var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 
 var _propTypes = require('prop-types');
 
@@ -82,24 +66,22 @@ var Clipboard = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.blur = function () {
+            _this.setState({
+                currect: false,
+                tootipContent: '复制'
+            });
+        };
+
         _this.state = {
             currect: false,
             actionTitle: '复制',
-            modalShow: false,
             html: '',
             tootipContent: '复制',
             id: 'id' + Math.round(Math.random() * 1000 + 1) + new Date().getTime()
         };
-        _this.close = _this.close.bind(_this);
-        _this.blur = _this.blur.bind(_this);
         return _this;
     }
-
-    Clipboard.prototype.close = function close() {
-        this.setState({
-            modalShow: false
-        });
-    };
 
     Clipboard.prototype.componentWillMount = function componentWillMount() {
         var self = this;
@@ -124,18 +106,10 @@ var Clipboard = function (_Component) {
         });
         cb.on('error', function (e) {
             self.setState({
-                html: e.text,
-                modalShow: true
+                html: e.text
             });
             _reactDom2["default"].findDOMNode(self.refs.text).select();
             if (error instanceof Function) error();
-        });
-    };
-
-    Clipboard.prototype.blur = function blur() {
-        this.setState({
-            currect: false,
-            tootipContent: '复制'
         });
     };
 
@@ -147,17 +121,10 @@ var Clipboard = function (_Component) {
             target = _props2.target;
 
         if (text) action = 'copy';
-        var tooltip = function tooltip() {
-            return _react2["default"].createElement(
-                _beeTooltip2["default"],
-                { positionTop: '20px' },
-                seft.state.tootipContent,
-                ' '
-            );
-        };
+
         return _react2["default"].createElement(
-            _OverlayTrigger2["default"],
-            { overlay: tooltip(), placement: 'top' },
+            _beeTooltip2["default"],
+            { positionTop: '20px', overlay: seft.state.tootipContent, placement: 'top' },
             _react2["default"].createElement(
                 'span',
                 { onMouseOut: this.blur, className: 'u-clipboard', id: this.state.id, 'data-clipboard-action': action,
@@ -169,33 +136,6 @@ var Clipboard = function (_Component) {
                             'uf-copy': !this.state.currect
                         }) },
                     ' '
-                ),
-                _react2["default"].createElement(
-                    _beeModal2["default"],
-                    { show: this.state.modalShow, onHide: this.close },
-                    _react2["default"].createElement(
-                        _beeModal2["default"].Header,
-                        { closeButton: true },
-                        _react2["default"].createElement(
-                            _beeModal2["default"].Title,
-                            null,
-                            ' Ctrl+C \u590D\u5236\u5230\u526A\u5207\u677F '
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        _beeModal2["default"].Body,
-                        null,
-                        _react2["default"].createElement(_beeFormControl2["default"], { ref: 'text', type: 'text', readOnly: true, value: this.state.html })
-                    ),
-                    _react2["default"].createElement(
-                        _beeModal2["default"].Footer,
-                        null,
-                        _react2["default"].createElement(
-                            _beeButton2["default"],
-                            { onClick: this.close },
-                            ' \u5173\u95ED '
-                        )
-                    )
                 )
             )
         );

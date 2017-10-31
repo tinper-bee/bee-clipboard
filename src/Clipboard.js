@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import Icon from 'bee-icon';
 import ReactDOM from 'react-dom';
 import Tooltip from 'bee-tooltip';
-import OverlayTrigger from 'bee-overlay/build/OverlayTrigger';
 import PropTypes from 'prop-types';
 
 //text和target都写的时候，target无效。 text的cut改为copy。
@@ -71,13 +70,9 @@ class Clipboard extends Component {
         const seft=this;
         let { action, text, target} = this.props;
         if(text)action='copy';
-        const tooltip = function () {
-            return (
-                <Tooltip positionTop="20px">{seft.state.tootipContent} </Tooltip>
-            );
-        };
+
         return (
-        <OverlayTrigger overlay = {tooltip()} placement="top" >
+        <Tooltip positionTop="20px" overlay = {seft.state.tootipContent} placement="top" >
             <span onMouseOut={this.blur} className="u-clipboard" id={this.state.id} data-clipboard-action={action}
                   data-clipboard-target={target} data-clipboard-text={text}>
                         {this.props.children ? this.props.children : (<Icon className={classnames({
@@ -85,7 +80,7 @@ class Clipboard extends Component {
                             'uf-copy': !this.state.currect
                         })}> </Icon>)}
             </span>
-        </OverlayTrigger>
+        </Tooltip>
         )
     }
 };
