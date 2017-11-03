@@ -69,6 +69,29 @@ import "./node_modules/bee-clipboard/build/Clipboard.css"
 |target|要复制内容的目标元素，可传选择器，如果选择器得出多个，会取第一个|`string`/dom选择器|-|
 |success|复制成功之后的回调函数|`function`|-|
 |error|复制失败之后的回调函数|`function`|-|
+|locale|设置默认文字语言|object|中文|
+
+### 多语设置
+
+通过给Clipboard组件设置locale语言对象。
+
+如：
+
+```
+export default {
+    lang: 'zh-cn',
+    copy: '复制',
+    cut: '剪切',
+    copyReady: '已复制',
+    cutReady: '已剪切'
+}
+```
+
+组件内默认中文，提供英文包。
+
+```
+import en from 'bee-clipboard/build/en_US.js';
+```
 
 #### 开发调试
 

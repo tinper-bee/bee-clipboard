@@ -5,6 +5,8 @@ import Icon from 'bee-icon';
 import ReactDOM from 'react-dom';
 import Tooltip from 'bee-tooltip';
 import PropTypes from 'prop-types';
+import { getComponentLocale } from 'bee-locale/build/tool';
+import cn from './zh-cn';
 
 //text和target都写的时候，target无效。 text的cut改为copy。
 // target可以传css3选择器
@@ -12,7 +14,8 @@ const propTypes = {
     action: PropTypes.oneOf(['copy', 'cut']),
     text: PropTypes.string,
     success: PropTypes.func,
-    error: PropTypes.func
+    error: PropTypes.func,
+    locale: PropTypes.object
 };
 const defaultProps = {
     action: 'copy',
@@ -21,33 +24,31 @@ const defaultProps = {
     success: () => {
     },
     error: () => {
-    }
+    },
+    locale: {}
 };
+
 class Clipboard extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             currect: false,
-            actionTitle: '复制',
             html: '',
-            tootipContent:'复制',
+            ready: false,
             id: 'id' + Math.round((Math.random() * 1000) + 1) + new Date().getTime(),
         };
     }
 
     componentWillMount() {
         let self = this;
-        let {action, success, error} = this.props;
-        let title = (action === 'copy' ? '复制' : '剪切');
-        self.setState({
-            actionTitle: title
-        });
-        let id=this.state.id;
+        let { success, error} = this.props;
+
+        let id = this.state.id;
         let cb = new clipboard('#' + id);
         cb.on('success', function (e) {
             self.setState({
                 currect: true,
-                tootipContent:'已复制',
+                ready: true
             });
             e.clearSelection();
             if (success instanceof Function) success();
@@ -60,27 +61,52 @@ class Clipboard extends Component {
             if (error instanceof Function) error();
         });
     }
-    blur=()=>{
+
+    blur = () => {
         this.setState({
             currect: false,
-            tootipContent:'复制'
+            ready: false
         });
     }
+
     render() {
-        const seft=this;
-        let { action, text, target} = this.props;
-        if(text)action='copy';
+        let {action, text, target} = this.props;
+        if (text) action = 'copy';
+
+        let locale = getComponentLocale(this.props, this.context, 'Clipboard', () => cn);
+        let tootipContent = locale[action];
+        if(this.state.ready){
+            tootipContent = locale[`${action}Ready`]
+        }
+
+
 
         return (
-        <Tooltip positionTop="20px" overlay = {seft.state.tootipContent} placement="top" >
-            <span onMouseOut={this.blur} className="u-clipboard" id={this.state.id} data-clipboard-action={action}
-                  data-clipboard-target={target} data-clipboard-text={text}>
-                        {this.props.children ? this.props.children : (<Icon className={classnames({
-                            'uf-correct': this.state.currect,
-                            'uf-copy': !this.state.currect
-                        })}> </Icon>)}
+            <Tooltip
+                positionTop="20px"
+                overlay={tootipContent}
+                placement="top">
+            <span
+                onMouseOut={this.blur}
+                className="u-clipboard"
+                id={this.state.id}
+                data-clipboard-action={action}
+                data-clipboard-target={target}
+                data-clipboard-text={text}>
+                        {
+                            this.props.children ?
+                                this.props.children :
+                                (
+                                    <Icon
+                                        className={classnames({
+                                            'uf-correct': this.state.currect,
+                                            'uf-copy': !this.state.currect
+                                        })}
+                                    />
+                                )
+                        }
             </span>
-        </Tooltip>
+            </Tooltip>
         )
     }
 };
