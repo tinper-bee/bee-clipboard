@@ -1,13 +1,12 @@
 /**
  *
  * @title 目标剪切
- * @description 剪切只适用于可输入的元素，如：FormControl。
+ * @description 剪切只适用于 textarea 元素
  *
  */
 
 import React, { Component } from 'react';
 import Clipboard from '../../src';
-import FormControl from 'bee-form-control';
 
 class Demo3 extends Component {
     render() {
@@ -19,7 +18,7 @@ class Demo3 extends Component {
         }
         return (
             <div>
-                <FormControl id="cutContent" value={"目标复制-我将被复制到剪切板"} />
+                <textarea id="cutContent" >我将被剪切到剪切板</textarea>
                 <Clipboard action="cut" target='#cutContent' success={success} error={error}>
                 </Clipboard>
             </div>
