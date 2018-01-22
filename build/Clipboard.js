@@ -38,6 +38,18 @@ var _zhCn = require('./zh-cn');
 
 var _zhCn2 = _interopRequireDefault(_zhCn);
 
+var _beeModal = require('bee-modal');
+
+var _beeModal2 = _interopRequireDefault(_beeModal);
+
+var _beeFormControl = require('bee-form-control');
+
+var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
+
+var _beeButton = require('bee-button');
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -51,7 +63,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //text和target都写的时候，target无效。 text的cut改为copy。
 // target可以传css3选择器
 var propTypes = {
-    action: _propTypes2["default"].oneOf(['copy', 'cut']),
+    action: _propTypes2["default"].oneOf(['copy', 'cut', null]),
     text: _propTypes2["default"].string,
     success: _propTypes2["default"].func,
     error: _propTypes2["default"].func,
@@ -81,11 +93,18 @@ var Clipboard = function (_Component) {
             });
         };
 
+        _this.close = function () {
+            _this.setState({
+                modalShow: false
+            });
+        };
+
         _this.state = {
             currect: false,
             html: '',
             ready: false,
-            id: 'id' + Math.round(Math.random() * 1000 + 1) + new Date().getTime()
+            id: 'id' + Math.round(Math.random() * 1000 + 1) + new Date().getTime(),
+            modalShow: false
         };
         return _this;
     }
@@ -109,6 +128,7 @@ var Clipboard = function (_Component) {
         });
         cb.on('error', function (e) {
             self.setState({
+                modalShow: true,
                 html: e.text
             });
             _reactDom2["default"].findDOMNode(self.refs.text).select();
@@ -152,7 +172,38 @@ var Clipboard = function (_Component) {
                         'uf-correct': this.state.currect,
                         'uf-copy': !this.state.currect
                     })
-                })
+                }),
+                _react2["default"].createElement(
+                    _beeModal2["default"],
+                    { show: this.state.modalShow, onHide: this.close },
+                    _react2["default"].createElement(
+                        _beeModal2["default"].Header,
+                        { closeButton: true },
+                        _react2["default"].createElement(
+                            _beeModal2["default"].Title,
+                            null,
+                            ' Ctrl+C ',
+                            locale['copyToClipboard'],
+                            ' '
+                        )
+                    ),
+                    _react2["default"].createElement(
+                        _beeModal2["default"].Body,
+                        null,
+                        _react2["default"].createElement(_beeFormControl2["default"], { ref: 'text', type: 'text', readOnly: true, value: this.state.html })
+                    ),
+                    _react2["default"].createElement(
+                        _beeModal2["default"].Footer,
+                        null,
+                        _react2["default"].createElement(
+                            _beeButton2["default"],
+                            { onClick: this.close },
+                            ' ',
+                            locale['close'],
+                            ' '
+                        )
+                    )
+                )
             )
         );
     };

@@ -7,11 +7,14 @@ import Tooltip from 'bee-tooltip';
 import PropTypes from 'prop-types';
 import { getComponentLocale } from 'bee-locale/build/tool';
 import cn from './zh-cn';
+import Modal from 'bee-modal';
+import FormControl from 'bee-form-control';
+import Button from 'bee-button';
 
 //text和target都写的时候，target无效。 text的cut改为copy。
 // target可以传css3选择器
 const propTypes = {
-    action: PropTypes.oneOf(['copy', 'cut']),
+    action: PropTypes.oneOf(['copy', 'cut',null]),
     text: PropTypes.string,
     success: PropTypes.func,
     error: PropTypes.func,
@@ -36,6 +39,7 @@ class Clipboard extends Component {
             html: '',
             ready: false,
             id: 'id' + Math.round((Math.random() * 1000) + 1) + new Date().getTime(),
+            modalShow:false
         };
     }
 
@@ -55,6 +59,7 @@ class Clipboard extends Component {
         });
         cb.on('error', function (e) {
             self.setState({
+                modalShow:true,
                 html: e.text
             });
             ReactDOM.findDOMNode(self.refs.text).select();
@@ -68,7 +73,11 @@ class Clipboard extends Component {
             ready: false
         });
     }
-
+    close=()=>{
+        this.setState({
+            modalShow:false
+        });
+    }
     render() {
         let {action, text, target} = this.props;
         if (text) action = 'copy';
@@ -78,8 +87,6 @@ class Clipboard extends Component {
         if(this.state.ready){
             tootipContent = locale[`${action}Ready`]
         }
-
-
 
         return (
             <Tooltip
@@ -105,8 +112,20 @@ class Clipboard extends Component {
                                     />
                                 )
                         }
+                <Modal show={ this.state.modalShow } onHide={ this.close }>
+                    <Modal.Header closeButton>
+                        <Modal.Title > Ctrl+C {locale['copyToClipboard']} </Modal.Title>
+                    </Modal.Header >
+                    <Modal.Body >
+                        <FormControl  ref="text" type="text" readOnly value={this.state.html}/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={ this.close }> {locale['close']} </Button>
+                    </Modal.Footer>
+                </Modal>
             </span>
             </Tooltip>
+
         )
     }
 };

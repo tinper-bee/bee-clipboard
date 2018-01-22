@@ -20,7 +20,10 @@
   "license": "MIT",
   "main": "./build/index.js",
   "config": {
-    "port": 8000
+    "port": 8000,
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "scripts": {
     "dev": "bee-tools run start",
@@ -34,12 +37,15 @@
   },
   "dependencies": {
     "babel-runtime": "latest",
-    "bee-icon": "^1.0.4",
+    "bee-button": "^1.0.6",
+    "bee-form-control": "^1.0.2",
+    "bee-icon": "latest",
     "bee-locale": "0.0.3",
+    "bee-modal": "^1.0.2",
     "bee-tooltip": "latest",
     "classnames": "^2.2.5",
     "clipboard": "^1.6.1",
-    "tinper-bee-core": "latest"
+    "tinper-bee-core": "^0.4.1"
   },
   "peerDependencies": {
     "react": "^15.3.0 || ^16.0",
@@ -47,12 +53,11 @@
     "prop-types": "15.6.0"
   },
   "devDependencies": {
-    "bee-button": "latest",
-    "bee-form-control": "^1.0.2",
     "bee-layout": "latest",
     "bee-panel": "latest",
     "chai": "^3.5.0",
     "console-polyfill": "~0.2.1",
+    "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^2.4.1",
     "es5-shim": "~4.1.10",
     "react": "15.3.2",
