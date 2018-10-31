@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import Tooltip from 'bee-tooltip';
 import PropTypes from 'prop-types';
 import { getComponentLocale } from 'bee-locale/build/tool';
-import cn from './zh-cn';
+import i18n from './i18n.js';
 import Modal from 'bee-modal';
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
@@ -82,7 +82,7 @@ class Clipboard extends Component {
         let {action, text, target} = this.props;
         if (text) action = 'copy';
 
-        let locale = getComponentLocale(this.props, this.context, 'Clipboard', () => cn);
+        let locale = getComponentLocale(this.props, this.context, 'Clipboard', () => i18n);
         let tootipContent = locale[action];
         if(this.state.ready){
             tootipContent = locale[`${action}Ready`]

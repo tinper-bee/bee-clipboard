@@ -34,9 +34,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _tool = require('bee-locale/build/tool');
 
-var _zhCn = require('./zh-cn');
+var _i18n = require('./i18n.js');
 
-var _zhCn2 = _interopRequireDefault(_zhCn);
+var _i18n2 = _interopRequireDefault(_i18n);
 
 var _beeModal = require('bee-modal');
 
@@ -145,7 +145,7 @@ var Clipboard = function (_Component) {
         if (text) action = 'copy';
 
         var locale = (0, _tool.getComponentLocale)(this.props, this.context, 'Clipboard', function () {
-            return _zhCn2["default"];
+            return _i18n2["default"];
         });
         var tootipContent = locale[action];
         if (this.state.ready) {

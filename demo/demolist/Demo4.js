@@ -7,7 +7,9 @@
 
 import React, { Component } from 'react';
 import Clipboard from '../../src';
-import en from '../../src/en_US';
+import ZhCn from "bee-locale/build/zh_CN.js";
+import ZhTw from "bee-locale/build/zh_TW.js";
+import EnUS from "bee-locale/build/en_US.js";
 
 class Demo4 extends Component {
     render() {
@@ -20,7 +22,7 @@ class Demo4 extends Component {
         }
 
         return (
-            <Clipboard locale={en} action="copy" text="默认复制-我将被复制到剪切板" success={success} error={error}>
+            <Clipboard locale={ZhTw.Clipboard}  action="copy" text="默认复制-我将被复制到剪切板" success={success} error={error}>
 
             </Clipboard>
         )
