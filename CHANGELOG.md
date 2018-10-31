@@ -1,5 +1,15 @@
+<a name="1.0.6"></a>
+## [1.0.6](https://github.com/tinper-bee/bee-clipboard/compare/v1.0.4...v1.0.6) (2018-10-31)
+
+
+### Features
+
+* **bee-clipboard:** 繁体多语 ([0679d6c](https://github.com/tinper-bee/bee-clipboard/commit/0679d6c))
+
+
+
 <a name="1.0.4"></a>
-## 1.0.4 (2018-01-16)
+## [1.0.4](https://github.com/tinper-bee/bee-clipboard/compare/283d952...v1.0.4) (2018-01-16)
 
 
 ### Bug Fixes
