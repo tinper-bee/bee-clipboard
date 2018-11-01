@@ -8009,7 +8009,7 @@
 	            {
 	                positionTop: '20px',
 	                overlay: tootipContent,
-	                placement: 'top', defaultOverlayShown: true },
+	                placement: 'top' },
 	            _react2['default'].createElement(
 	                'span',
 	                {

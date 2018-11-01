@@ -1,4 +1,5 @@
 module.exports = {
+    'lang': 'zh-cn',
     'copy': '复制',
     'cut': '剪切',
     'copyReady': '已复制',
