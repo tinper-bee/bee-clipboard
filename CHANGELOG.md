@@ -1,3 +1,13 @@
+<a name="1.0.7"></a>
+## [1.0.7](https://github.com/tinper-bee/bee-clipboard/compare/v1.0.6...v1.0.7) (2018-11-01)
+
+
+### Features
+
+* **bee-clipboard:** 繁体 ([58767cd](https://github.com/tinper-bee/bee-clipboard/commit/58767cd))
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/tinper-bee/bee-clipboard/compare/v1.0.4...v1.0.6) (2018-10-31)
 
